@@ -1,0 +1,441 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>harness E</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Do+Hyeon&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@500;700;900&family=Special+Elite&family=Hi+Melody&family=Caveat:wght@700&family=Noto+Serif+KR:wght@600;700;900&family=Hahmlet:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&family=Yeon+Sung&family=Song+Myung&family=Nanum+Myeongjo:wght@400;700;800&family=East+Sea+Dokdo&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Bagel+Fat+One&family=Orbit&family=Nanum+Gothic+Coding:wght@400;700&family=Gowun+Batang:wght@700&display=block">
+<style>html,body{margin:0;background:transparent;overflow:hidden}#cap{width:700px;height:980px;position:relative;overflow:hidden}</style>
+</head><body><div id="cap"></div>
+<script>window.ASSETS={};</script>
+<script>// 포스터 시안 공용 키트 — 모든 안이 같은 문구·같은 시간축(seek)을 쓴다.
+// 포스터 설계 크기: 700 x 980 (원본 포스터 5:7). 호스트가 transform으로 축소한다.
+window.POSTERS = window.POSTERS || {};
+
+// 원본 포스터(poster-original.jpeg) 문구 그대로. 안마다 빼지 말 것.
+window.D = {
+  edition: '제14회',
+  purpose: '장학기금 마련과 불우이웃 돕기를 위한',
+  title1: '천사데이',
+  title2: '찬스바자회',
+  dateLong: '2026년 10월 17일 (토)',
+  dateShort: '10.17',
+  year: '2026',
+  weekday: '토',
+  weekdayLong: '토요일',
+  time: '오전 9시 30분 – 오후 5시',
+  timeShort: '9:30 – 17:00',
+  venue: '홀리씨즈교회',
+  address: '서초구 동광로 8길 1',
+  tagline: '기부 천사가 될 수 있는 단 하루!',
+  welcome: 'WELCOME TO BAZAAR',
+  contactLabel: '문의', contact: '02-593-0777',
+  hostLabel: '주최·주관', host: '홀리씨즈교회 / HSS(홀리씨즈스쿨)',
+  sponsorLabel: '후원', sponsor: '글로벌선교회, (사)세계청소년문화육성협회',
+  // v3: hssbazaar.kr 'BAZAAR 2026 · 판매관과 라인업' 페이지의 판매관 이름 그대로 (가격·할인율은 넣지 않는다)
+  booths: ['홀리파머스마켓', '홀리피셔마켓', '홀리플리마켓', '홀리약국', '아동용품관', '의류 및 악세사리관', '리빙관', '슈즈관', '푸드코트', '재능기부 마켓'],
+};
+// 오늘 기준 D-day (행사일 2026-10-17)
+(() => {
+  const now = (() => { try { const q = new URLSearchParams(parent.location.search).get('today'); if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return new Date(q + 'T12:00:00'); } catch (e) {} return new Date(Date.now() + (new Date().getTimezoneOffset() + 540) * 6e4); })(); const ev = new Date(2026, 9, 17);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const n = Math.round((ev - today) / 864e5);
+  window.D.dday = n > 0 ? 'D-' + n : n === 0 ? 'D-DAY' : 'D+' + (-n);
+})();
+
+// 사용자 제공 QR(Linktree) 해독 주소 그대로 다시 만든 QR. 오류정정 Q, 37x37 모듈.
+window.QR = { url: "https://linktr.ee/qr/87da1411-68b8-4bdd-a08f-fee0cb8254ef", rows: ["1111111001111101010001001101001111111", "1000001000101100100101001010001000001", "1011101010101100110011001001101011101", "1011101000100000101010011110101011101", "1011101011010111010100111111001011101", "1000001010100111001110100010101000001", "1111111010101010101010101010101111111", "0000000000101001000011110000000000000", "0100101011000001001001000011110110100", "1111000010011111000110111001000011010", "0001111100011101001011111111110001010", "0111000001111101010101110011110000100", "0010001001101100110111001001011000110", "1000000100111000100000110111110110100", "0111001011101100011011110111110011100", "1011110001011100010011101011000000111", "1100111100111111111000011000111001110", "0111100000100101100110010111010011000", "1100111111110101110101011011011110100", "0110000011000111001111111000010110100", "1001011000100101101011101001001000100", "0101010100001010101000110111000011000", "0000101010100010111101111011110001000", "1011110101111101011001011010101101100", "0111111101010001101011010011111001110", "1100110110000011101001111001000111000", "0011111100101010001111111011110100110", "0010100011100101100001110000101100100", "1111001110111111001011101000111110101", "0000000010110011100001010111100011000", "1111111000100100001000011010101011110", "1000001001100000110010110001100010111", "1011101011101100011000111000111111101", "1011101000011001001110010111001101010", "1011101000100111110010010010001100110", "1000001011111110100001111001010001110", "1111111000010100101111001010000100111"] };
+// QR SVG 문자열. fg 짙은 색 / bg 밝은 색 (반전 금지 — 스캐너가 못 읽는 경우가 있다), quiet = 여백 모듈 수(최소 2).
+window.qrSVG = (fg = '#111', bg = '#fff', quiet = 3) => {
+  const R = window.QR.rows, n = R.length, N = n + quiet * 2; let d = '';
+  R.forEach((row, y) => { for (let x = 0; x < n; x++) if (row[x] === '1') { let w = 1; while (x + w < n && row[x + w] === '1') w++; d += `M${x + quiet} ${y + quiet}h${w}v1h-${w}z`; x += w - 1; } });
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${N} ${N}" shape-rendering="crispEdges" role="img" aria-label="QR 코드"><rect width="${N}" height="${N}" fill="${bg}"/><path d="${d}" fill="${fg}"/></svg>`;
+};
+
+// 이름에 확장자가 없으면 v1 잘라 낸 레이어(assets/<name>.png), 있으면 assets/<경로> (예: 'A2/plate.webp'). 빌드 때 data URI로 바뀐다.
+window.ASSET = name => (window.ASSETS && window.ASSETS[name]) || ('assets/' + (/\.\w+$/.test(name) ? name : name + '.png'));
+
+// 결정적 난수 (seek 해도 같은 결과)
+window.mulberry = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+// code 안의 포스터를 host 안에 붙이고 {T, seek} 를 돌려준다.
+// build(root, ctx) 규약:
+//   ctx.anim(target, keyframes, {at, dur, ease, iter, dir, stagger, composite})
+//       target = 요소 | root 기준 선택자. at·dur·stagger 는 초. fill 은 'both' 고정.
+//       기본 상태(CSS)는 '완성된 포스터'. 키프레임은 숨은 상태에서 시작해 완성 상태로 끝나게.
+//   ctx.onSeek(fn(t))  — JS로 그리는 효과(글자 섞기, 캔버스)용. t 초.
+//   ctx.D, ctx.asset(name), ctx.rand(seed)
+window.mountPoster = function (code, host) {
+  const P = POSTERS[code];
+  const tpl = document.getElementById('tpl-' + code);
+  host.appendChild(tpl.content.cloneNode(true));
+  const root = host.querySelector('.p' + code);
+  const anims = [], seekFns = [];
+  const ctx = {
+    D: window.D, asset: window.ASSET, rand: window.mulberry,
+    anim(target, kf, o = {}) {
+      const els = typeof target === 'string' ? [...root.querySelectorAll(target)] : (target instanceof Element ? [target] : [...target]);
+      els.forEach((el, i) => {
+        const a = el.animate(kf, {
+          duration: (o.dur ?? 0.6) * 1000, delay: ((o.at ?? 0) + i * (o.stagger ?? 0)) * 1000,
+          easing: o.ease ?? 'cubic-bezier(.2,.8,.2,1)', iterations: o.iter ?? 1, direction: o.dir ?? 'normal',
+          fill: 'both', composite: o.composite ?? 'replace',
+        });
+        a.pause(); anims.push(a);
+      });
+    },
+    onSeek(fn) { seekFns.push(fn); },
+  };
+  P.build(root, ctx);
+  const seek = t => { const ms = t * 1000; for (const a of anims) a.currentTime = ms; for (const f of seekFns) f(t); };
+  seek(P.T);
+  return { T: P.T, seek, root, name: P.name };
+};
+// v4: 홀리피셔마켓은 올해 열리지 않을 수 있어 뺀 목록. v4 포스터는 이것을 **이름으로** 고른다(인덱스 금지 — v3 는 booths 인덱스를 씀).
+window.D.booths4 = window.D.booths.filter(b => b !== '홀리피셔마켓');
+</script>
+<!-- fonts: Bagel+Fat+One|Black+Han+Sans|Orbit|Do+Hyeon -->
+<style>
+.pE{position:absolute;inset:0;overflow:hidden;width:700px;height:980px;font-family:'Orbit','Do Hyeon',sans-serif;color:#231c4a;
+  background:linear-gradient(165deg,#f6f3ff 0%,#e9ebf6 38%,#efe6fb 62%,#fde9dc 100%);}
+.pE *{box-sizing:border-box;margin:0;padding:0}
+.pE .pE-svgdefs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* background: pearl grid + holo blobs */
+.pE .pE-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.75) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(255,255,255,.75) 1.5px,transparent 1.5px);
+  background-size:35px 35px;background-position:-1px -1px}
+.pE .pE-bw{position:absolute;width:560px;height:560px}
+.pE .pE-blob{width:100%;height:100%;border-radius:50%}
+.pE .pE-bw.b1{left:-220px;top:-170px}
+.pE .pE-bw.b1 .pE-blob{background:radial-gradient(circle at 50% 50%,rgba(186,166,255,.85) 0%,rgba(186,166,255,.35) 40%,rgba(186,166,255,0) 68%)}
+.pE .pE-bw.b2{left:330px;top:-120px}
+.pE .pE-bw.b2 .pE-blob{background:radial-gradient(circle,rgba(150,226,255,.8) 0%,rgba(150,226,255,.3) 40%,rgba(150,226,255,0) 68%)}
+.pE .pE-bw.b3{left:-180px;top:380px}
+.pE .pE-bw.b3 .pE-blob{background:radial-gradient(circle,rgba(212,255,110,.75) 0%,rgba(212,255,110,.28) 40%,rgba(212,255,110,0) 68%)}
+.pE .pE-bw.b4{left:340px;top:420px}
+.pE .pE-bw.b4 .pE-blob{background:radial-gradient(circle,rgba(255,170,120,.85) 0%,rgba(255,170,120,.32) 40%,rgba(255,170,120,0) 68%)}
+.pE .pE-bw.b5{left:80px;top:150px;width:600px;height:600px}
+.pE .pE-bw.b5 .pE-blob{background:radial-gradient(circle,rgba(255,196,236,.7) 0%,rgba(255,196,236,.25) 40%,rgba(255,196,236,0) 68%)}
+
+/* menubar */
+.pE .pE-menu{position:absolute;left:0;right:0;top:0;height:46px;display:flex;align-items:center;gap:22px;padding:0 20px;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(226,224,244,.92));border-bottom:2px solid #231c4a;font-size:17px;letter-spacing:.02em}
+.pE .pE-menu b{font-family:'Black Han Sans';font-weight:400;font-size:20px;letter-spacing:.06em}
+.pE .pE-menu .pE-mstar{width:22px;height:22px;display:block}
+.pE .pE-menu .pE-mr{margin-left:auto;display:flex;align-items:center;gap:10px}
+.pE .pE-menu .pE-dot{width:12px;height:12px;border-radius:50%;background:#c6ff3d;border:2px solid #231c4a}
+
+/* header row */
+.pE .pE-purpose{position:absolute;left:186px;top:74px;height:44px;padding:0 22px;display:flex;align-items:center;border-radius:22px;
+  font-family:'Do Hyeon';font-size:22px;color:#231c4a;letter-spacing:.01em;
+  background:linear-gradient(180deg,#ffffff 0%,#eceaf7 45%,#c9c6dd 52%,#f4f3fb 100%);border:2px solid #231c4a;box-shadow:4px 4px 0 #231c4a}
+.pE .pE-ed{position:absolute;left:34px;top:62px;width:132px;height:132px}
+.pE .pE-edi{width:100%;height:100%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:3px solid #231c4a;box-shadow:4px 5px 0 #231c4a;transform:rotate(-4deg);
+  background:linear-gradient(135deg,#ffd6f0 0%,#d8ccff 22%,#bff3ff 42%,#e9ffb8 60%,#ffe0c4 78%,#f2c9ff 100%)}
+.pE .pE-edi span{font-family:'Orbit';font-size:16px;letter-spacing:.14em}
+.pE .pE-edi b{font-family:'Black Han Sans';font-weight:400;font-size:38px;line-height:1.05;color:#231c4a}
+
+/* titles */
+.pE .pE-title{position:absolute;left:0;right:0;text-align:center;font-family:'Bagel Fat One';font-weight:400;white-space:nowrap}
+.pE .pE-title .pE-L{display:block}
+.pE .pE-title .pE-L + .pE-L{position:absolute;left:0;top:0;width:100%}
+.pE .pE-t1{top:178px;font-size:168px;line-height:200px;letter-spacing:-4px}
+.pE .pE-t2{top:378px;font-size:112px;line-height:140px;letter-spacing:-2px}
+.pE .pE-ext{color:#231c4a;-webkit-text-stroke:22px #231c4a;transform:translate(5px,7px)}
+.pE .pE-rim{color:#231c4a;-webkit-text-stroke:12px #231c4a}
+.pE .pE-rgb{opacity:0}
+.pE .pE-rgb.r{color:#ff2d78}
+.pE .pE-rgb.c{color:#19c8ff}
+.pE .pE-face{color:transparent;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:2.5px rgba(255,255,255,.95)}
+.pE .pE-t1 .pE-face{background-image:linear-gradient(180deg,#5d6684 0%,#a4adc4 11%,#eef1f7 24%,#9aa2bb 37%,#3a405c 46%,#1c2036 50%,#6f7896 54%,#dfe4ee 62%,#ffffff 68%,#ffc39a 77%,#ff7a2e 87%,#d2520f 94%,#a83d08 100%)}
+.pE .pE-t2 .pE-face{background-image:linear-gradient(180deg,#fff6ec 0%,#ffd7b5 16%,#ff9a52 34%,#c9460a 47%,#5a1d06 51%,#ff7a2e 56%,#ffd0a8 66%,#fff4e8 74%,#d9d0ff 86%,#a99bf0 100%)}
+.pE .pE-sheen{color:transparent;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-image:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 48%,rgba(255,255,255,.2) 51%,rgba(255,255,255,.95) 53%,rgba(255,255,255,0) 58%,rgba(255,255,255,0) 100%);
+  background-size:300% 100%;background-repeat:no-repeat;background-position:110% 0}
+
+/* wings */
+.pE .pE-wing{position:absolute;top:150px;width:190px;height:140px}
+.pE .pE-wing svg{width:100%;height:100%;display:block;overflow:visible}
+.pE .pE-wing.L{left:-30px}
+.pE .pE-wing.R{right:-30px}
+.pE .pE-wing.R svg{transform:scaleX(-1)}
+.pE .pE-wing.L .pE-wi{transform-origin:100% 85%}
+.pE .pE-wing.R .pE-wi{transform-origin:0% 85%}
+
+/* windows */
+.pE .pE-win{position:absolute;border:3px solid #231c4a;border-radius:12px;background:#ffffff;box-shadow:7px 7px 0 #231c4a;overflow:hidden}
+.pE .pE-bar{height:40px;display:flex;align-items:center;gap:8px;padding:0 10px 0 14px;border-bottom:3px solid #231c4a;font-size:18px;color:#fff;letter-spacing:.04em;
+  background:linear-gradient(180deg,#6a52e0 0%,#5b43d6 48%,#4a32c4 52%,#5a42d4 100%)}
+.pE .pE-bar .pE-btns{margin-left:auto;display:flex;gap:6px}
+.pE .pE-bar .pE-btns i{display:block;width:20px;height:20px;border-radius:5px;border:2px solid #231c4a;background:linear-gradient(180deg,#fff,#d7d3ee)}
+.pE .pE-bar .pE-btns i.x{background:linear-gradient(180deg,#ffd0b0,#ff7a2e)}
+.pE .pE-w1{left:30px;top:534px;width:452px;height:266px}
+.pE .pE-w1 .pE-body{padding:12px 22px 0}
+.pE .pE-date{font-family:'Black Han Sans';font-size:40px;line-height:48px;color:#231c4a;white-space:nowrap}
+.pE .pE-time{font-family:'Black Han Sans';font-size:31px;line-height:38px;margin-top:4px;color:#a83d08;white-space:nowrap}
+.pE .pE-div{margin:12px 0 10px;height:0;border-top:3px dashed #231c4a}
+.pE .pE-venue{font-family:'Black Han Sans';font-size:36px;line-height:44px;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.pE .pE-pin{width:24px;height:30px;display:block;flex:none}
+.pE .pE-addr{font-family:'Do Hyeon';font-size:23px;line-height:30px;margin-top:4px;padding-left:34px;white-space:nowrap;color:#231c4a}
+
+/* stickers */
+.pE .pE-dd{position:absolute;left:432px;top:494px;width:128px;height:128px}
+.pE .pE-ddi{width:100%;height:100%;position:relative;transform:rotate(4deg)}
+.pE .pE-ddi svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pE .pE-ddt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pE .pE-ddt span{font-size:16px;letter-spacing:.12em}
+.pE .pE-ddt b{font-family:'Black Han Sans';font-weight:400;font-size:36px;line-height:1}
+.pE .pE-tag{position:absolute;left:34px;top:818px}
+.pE .pE-tagi{transform:rotate(-3deg);padding:8px 22px;border:3px solid #231c4a;border-radius:30px;box-shadow:5px 5px 0 #231c4a;
+  background:linear-gradient(180deg,#e8ff9e 0%,#c6ff3d 50%,#b2f020 100%);font-family:'Do Hyeon';font-size:27px;line-height:34px;white-space:nowrap}
+
+/* QR window (QR itself never transformed) */
+.pE .pE-wq{left:500px;top:634px;width:176px;height:252px}
+.pE .pE-wq .pE-bar{background:linear-gradient(180deg,#b8480c 0%,#ad420a 48%,#9a3a08 52%,#a8410a 100%);padding:0 8px 0 12px}
+.pE .pE-qr{width:150px;height:150px;margin:10px auto 0;display:block}
+.pE .pE-qr svg{width:150px;height:150px;display:block}
+.pE .pE-qlab{text-align:center;font-family:'Black Han Sans';font-size:22px;line-height:30px;margin-top:6px;color:#231c4a}
+.pE .pE-contact{position:absolute;right:22px;top:10px;white-space:nowrap}
+
+/* taskbar footer */
+.pE .pE-task{position:absolute;left:0;right:0;bottom:0;height:80px;padding:10px 22px 0;border-top:3px solid #231c4a;
+  background:linear-gradient(180deg,#ffffff 0%,#efedf9 100%);font-family:'Do Hyeon';font-size:21px;line-height:32px;color:#231c4a}
+.pE .pE-task p{white-space:nowrap}
+.pE .pE-task b{font-family:'Black Han Sans';font-weight:400;font-size:21px;margin-right:8px;color:#4a32c4}
+
+/* sparkles */
+.pE .pE-st{position:absolute}
+.pE .pE-st svg{width:100%;height:100%;display:block;overflow:visible}
+.pE .pE-stw{width:100%;height:100%}
+</style>
+
+<template id="tpl-E"><div class="pE">
+  <svg class="pE-svgdefs" aria-hidden="true"><defs>
+    <linearGradient id="pE-chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#d4d9e6"/><stop offset=".46" stop-color="#6d7593"/>
+      <stop offset=".52" stop-color="#2b2f4a"/><stop offset=".6" stop-color="#c9cfdd"/><stop offset=".74" stop-color="#ffffff"/>
+      <stop offset=".88" stop-color="#ffb07a"/><stop offset="1" stop-color="#ea6519"/>
+    </linearGradient>
+    <linearGradient id="pE-chromeH" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".38" stop-color="#cfd5e4"/><stop offset=".5" stop-color="#4a5170"/>
+      <stop offset=".58" stop-color="#e7eaf3"/><stop offset=".8" stop-color="#ffffff"/><stop offset="1" stop-color="#ffb487"/>
+    </linearGradient>
+    <linearGradient id="pE-lime" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1ffc2"/><stop offset=".5" stop-color="#c6ff3d"/><stop offset="1" stop-color="#93d10f"/></linearGradient>
+    <linearGradient id="pE-lav" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#b9a8ff"/><stop offset="1" stop-color="#7f68f0"/></linearGradient>
+    <path id="pE-star" d="M50 0 C53 38 60 46 100 50 C60 54 53 62 50 100 C47 62 40 54 0 50 C40 46 47 38 50 0Z"/>
+  </defs></svg>
+
+  <div class="pE-grid"></div>
+  <div class="pE-bw b5"><div class="pE-blob"></div></div>
+  <div class="pE-bw b1"><div class="pE-blob"></div></div>
+  <div class="pE-bw b2"><div class="pE-blob"></div></div>
+  <div class="pE-bw b3"><div class="pE-blob"></div></div>
+  <div class="pE-bw b4"><div class="pE-blob"></div></div>
+
+  <div class="pE-menu">
+    <svg class="pE-mstar" viewBox="0 0 100 100"><use href="#pE-star" fill="url(#pE-lav)" stroke="#231c4a" stroke-width="6"/></svg>
+    <b>ANGEL.OS</b><span>File</span><span>Edit</span><span>Bazaar</span><span>Help</span>
+    <span class="pE-mr"><i class="pE-dot"></i><span>SAT 09:30</span></span>
+  </div>
+
+  <div class="pE-ed"><div class="pE-edi"><span>NO.</span><b data-k="edition"></b></div></div>
+  <div class="pE-purpose" data-k="purpose"></div>
+
+  <div class="pE-wing L"><div class="pE-wi"><svg viewBox="0 0 200 150"><g fill="url(#pE-chromeH)" stroke="#231c4a" stroke-width="5" stroke-linejoin="round">
+    <path d="M196 132 C150 128 112 126 78 132 C62 135 60 150 76 150 C118 150 160 146 196 144 Z"/>
+    <path d="M196 120 C150 104 96 92 46 92 C28 92 26 112 42 116 C94 128 146 134 196 136 Z"/>
+    <path d="M196 106 C146 70 84 30 22 26 C4 25 2 48 16 56 C76 88 140 112 196 124 Z"/>
+  </g></svg></div></div>
+  <div class="pE-wing R"><div class="pE-wi"><svg viewBox="0 0 200 150"><g fill="url(#pE-chromeH)" stroke="#231c4a" stroke-width="5" stroke-linejoin="round">
+    <path d="M196 132 C150 128 112 126 78 132 C62 135 60 150 76 150 C118 150 160 146 196 144 Z"/>
+    <path d="M196 120 C150 104 96 92 46 92 C28 92 26 112 42 116 C94 128 146 134 196 136 Z"/>
+    <path d="M196 106 C146 70 84 30 22 26 C4 25 2 48 16 56 C76 88 140 112 196 124 Z"/>
+  </g></svg></div></div>
+
+  <div class="pE-title pE-t1"><div class="pE-tg">
+    <span class="pE-L pE-ext" data-k="title1"></span>
+    <span class="pE-L pE-rim" data-k="title1"></span>
+    <span class="pE-L pE-rgb r" data-k="title1"></span>
+    <span class="pE-L pE-rgb c" data-k="title1"></span>
+    <span class="pE-L pE-face" data-k="title1"></span>
+    <span class="pE-L pE-sheen" data-k="title1"></span>
+  </div></div>
+  <div class="pE-title pE-t2"><div class="pE-tg">
+    <span class="pE-L pE-ext" data-k="title2"></span>
+    <span class="pE-L pE-rim" data-k="title2"></span>
+    <span class="pE-L pE-rgb r" data-k="title2"></span>
+    <span class="pE-L pE-rgb c" data-k="title2"></span>
+    <span class="pE-L pE-face" data-k="title2"></span>
+    <span class="pE-L pE-sheen" data-k="title2"></span>
+  </div></div>
+
+  <div class="pE-win pE-w1"><div class="pE-wb">
+    <div class="pE-bar"><span>info_1017.exe</span><span class="pE-btns"><i></i><i></i><i class="x"></i></span></div>
+    <div class="pE-body">
+      <div class="pE-date" data-k="dateLong"></div>
+      <div class="pE-time" data-k="time"></div>
+      <div class="pE-div"></div>
+      <div class="pE-venue"><svg class="pE-pin" viewBox="0 0 24 30"><path d="M12 28 C5 19 2 15 2 10.5 A10 10 0 0 1 22 10.5 C22 15 19 19 12 28Z" fill="#ff7a2e" stroke="#231c4a" stroke-width="2.5"/><circle cx="12" cy="10.5" r="3.6" fill="#fff" stroke="#231c4a" stroke-width="2"/></svg><span data-k="venue"></span></div>
+      <div class="pE-addr" data-k="address"></div>
+    </div>
+  </div></div>
+
+  <div class="pE-win pE-wq"><div class="pE-wb">
+    <div class="pE-bar"><span>scan_me.exe</span><span class="pE-btns"><i class="x"></i></span></div>
+    <div class="pE-qr"></div>
+    <div class="pE-qlab">QR 스캔</div>
+  </div></div>
+
+  <div class="pE-dd"><div class="pE-ddi">
+    <svg viewBox="0 0 120 120"><path class="pE-scal" fill="url(#pE-lime)" stroke="#231c4a" stroke-width="3.5" d=""/></svg>
+    <div class="pE-ddt"><span>COUNT</span><b data-k="dday"></b></div>
+  </div></div>
+
+  <div class="pE-tag"><div class="pE-tagi" data-k="tagline"></div></div>
+
+  <div class="pE-task">
+    <p><b data-k="hostLabel"></b><span data-k="host"></span></p>
+    <p><b data-k="sponsorLabel"></b><span data-k="sponsor"></span></p>
+    <p class="pE-contact"><b data-k="contactLabel"></b><span data-k="contact"></span></p>
+  </div>
+
+  <div class="pE-st s1" style="left:24px;top:300px;width:46px;height:84px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="url(#pE-chrome)" stroke="#231c4a" stroke-width="3"/></svg></div></div>
+  <div class="pE-st s2" style="left:622px;top:338px;width:56px;height:100px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="url(#pE-lime)" stroke="#231c4a" stroke-width="3"/></svg></div></div>
+  <div class="pE-st s3" style="left:590px;top:60px;width:40px;height:70px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="url(#pE-lav)" stroke="#231c4a" stroke-width="3.5"/></svg></div></div>
+  <div class="pE-st s4" style="left:640px;top:126px;width:26px;height:44px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="#ff8a3d" stroke="#231c4a" stroke-width="5"/></svg></div></div>
+  <div class="pE-st s5" style="left:444px;top:812px;width:40px;height:66px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="url(#pE-chrome)" stroke="#231c4a" stroke-width="3"/></svg></div></div>
+  <div class="pE-st s6" style="left:14px;top:500px;width:30px;height:52px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="url(#pE-lav)" stroke="#231c4a" stroke-width="5"/></svg></div></div>
+  <div class="pE-st s7" style="left:612px;top:572px;width:30px;height:50px"><div class="pE-stw"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><use href="#pE-star" fill="#ff8a3d" stroke="#231c4a" stroke-width="5"/></svg></div></div>
+</div></template>
+
+<script>
+POSTERS.E = {
+  name: '네오 Y2K',
+  T: 8,
+  build(root, ctx) {
+    const D = ctx.D;
+    root.querySelectorAll('[data-k]').forEach(el => { el.textContent = D[el.dataset.k]; });
+
+    // scalloped sticker edge (no rays — round bumps)
+    const N = 14, cx = 60, cy = 60, R = 56, r = 50;
+    let d = '';
+    for (let i = 0; i < N; i++) {
+      const a0 = (i / N) * Math.PI * 2, a1 = ((i + .5) / N) * Math.PI * 2, a2 = ((i + 1) / N) * Math.PI * 2;
+      const p = (a, rr) => (cx + Math.cos(a) * rr).toFixed(2) + ' ' + (cy + Math.sin(a) * rr).toFixed(2);
+      d += (i ? ' ' : 'M' + p(a0, r)) + ' Q' + p(a1, R + 9) + ' ' + p(a2, r);
+    }
+    root.querySelector('.pE-scal').setAttribute('d', d + 'Z');
+
+    root.querySelector('.pE-qr').innerHTML = qrSVG('#231c4a', '#ffffff', 3);
+
+    const S = 'steps(1,end)';
+    // ---- background ----
+    ctx.anim('.pE-blob', [{ transform: 'scale(.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }], { at: 0, dur: 1.4, stagger: .12, ease: 'cubic-bezier(.2,.7,.2,1)' });
+    const drift = [[60, 40], [-50, 50], [40, -40], [-60, -30], [30, 50]];
+    root.querySelectorAll('.pE-bw').forEach((el, i) => {
+      const [x, y] = drift[i];
+      ctx.anim(el, [{ transform: 'translate(0,0)' }, { transform: `translate(${x}px,${y}px)` }], { at: 0, dur: 4, iter: Infinity, dir: 'alternate', ease: 'ease-in-out' });
+    });
+    ctx.anim('.pE-grid', [{ opacity: 0 }, { opacity: 1 }], { at: .1, dur: .8 });
+    ctx.anim('.pE-menu', [{ transform: 'translateY(-50px)' }, { transform: 'translateY(0)' }], { at: .15, dur: .6 });
+
+    // ---- title glitch entrance (RGB split, steps) ----
+    const glitch = (sel, at, k) => {
+      ctx.anim(sel + ' .pE-tg', [
+        { opacity: 0, transform: 'translate(0,0) skewX(0)', easing: S },
+        { opacity: 1, transform: `translate(${-14 * k}px,0) skewX(-8deg)`, offset: .14, easing: S },
+        { opacity: .3, transform: `translate(${10 * k}px,${-3 * k}px) skewX(6deg)`, offset: .28, easing: S },
+        { opacity: 1, transform: `translate(${-6 * k}px,${2 * k}px) skewX(0)`, offset: .42, easing: S },
+        { opacity: 1, transform: `translate(${3 * k}px,0)`, offset: .58, easing: S },
+        { opacity: 1, transform: 'translate(0,0)' },
+      ], { at, dur: .9, ease: 'linear' });
+      ctx.anim(sel + ' .pE-rgb.r', [
+        { opacity: 0, transform: 'translate(0,0)', clipPath: 'inset(0 0 0 0)', easing: S },
+        { opacity: .95, transform: `translate(${-16 * k}px,${-4 * k}px)`, clipPath: 'inset(10% 0 45% 0)', offset: .1, easing: S },
+        { opacity: .95, transform: `translate(${12 * k}px,${3 * k}px)`, clipPath: 'inset(0 0 0 0)', offset: .26, easing: S },
+        { opacity: .9, transform: `translate(${-9 * k}px,0)`, clipPath: 'inset(55% 0 5% 0)', offset: .42, easing: S },
+        { opacity: .85, transform: `translate(${-5 * k}px,${2 * k}px)`, clipPath: 'inset(0 0 0 0)', offset: .58, easing: S },
+        { opacity: .7, transform: `translate(${-3 * k}px,0)`, clipPath: 'inset(0 0 0 0)', offset: .74 },
+        { opacity: 0, transform: 'translate(0,0)', clipPath: 'inset(0 0 0 0)' },
+      ], { at, dur: 1.5, ease: 'linear' });
+      ctx.anim(sel + ' .pE-rgb.c', [
+        { opacity: 0, transform: 'translate(0,0)', clipPath: 'inset(0 0 0 0)', easing: S },
+        { opacity: .95, transform: `translate(${16 * k}px,${4 * k}px)`, clipPath: 'inset(40% 0 10% 0)', offset: .1, easing: S },
+        { opacity: .95, transform: `translate(${-12 * k}px,${-3 * k}px)`, clipPath: 'inset(0 0 0 0)', offset: .26, easing: S },
+        { opacity: .9, transform: `translate(${9 * k}px,0)`, clipPath: 'inset(5% 0 60% 0)', offset: .42, easing: S },
+        { opacity: .85, transform: `translate(${5 * k}px,${-2 * k}px)`, clipPath: 'inset(0 0 0 0)', offset: .58, easing: S },
+        { opacity: .7, transform: `translate(${3 * k}px,0)`, clipPath: 'inset(0 0 0 0)', offset: .74 },
+        { opacity: 0, transform: 'translate(0,0)', clipPath: 'inset(0 0 0 0)' },
+      ], { at, dur: 1.5, ease: 'linear' });
+    };
+    glitch('.pE-t1', .45, 1);
+    glitch('.pE-t2', 1.0, .75);
+
+    // chrome sheen sweep (lands off-glyph exactly at t=8)
+    const sweep = [{ backgroundPosition: '110% 0', offset: 0 }, { backgroundPosition: '-10% 0', offset: .6 }, { backgroundPosition: '-10% 0', offset: 1 }];
+    ctx.anim('.pE-t1 .pE-sheen', sweep, { at: 2, dur: 2, iter: Infinity, ease: 'cubic-bezier(.45,0,.3,1)' });
+    ctx.anim('.pE-t2 .pE-sheen', sweep, { at: 2.4, dur: 2.8, iter: Infinity, ease: 'cubic-bezier(.45,0,.3,1)' });
+
+    // wings unfold
+    ctx.anim('.pE-wing.L .pE-wi', [{ transform: 'rotate(40deg) scale(.4)', opacity: 0 }, { transform: 'rotate(-8deg) scale(1.08)', opacity: 1, offset: .6 }, { transform: 'rotate(0) scale(1)', opacity: 1 }], { at: 1.2, dur: .9 });
+    ctx.anim('.pE-wing.R .pE-wi', [{ transform: 'rotate(-40deg) scale(.4)', opacity: 0 }, { transform: 'rotate(8deg) scale(1.08)', opacity: 1, offset: .6 }, { transform: 'rotate(0) scale(1)', opacity: 1 }], { at: 1.2, dur: .9 });
+    ctx.anim('.pE-wing.L', [{ transform: 'rotate(0)' }, { transform: 'rotate(-4deg)' }], { at: 2.1, dur: 1.475, iter: Infinity, dir: 'alternate', ease: 'ease-in-out' });
+    ctx.anim('.pE-wing.R', [{ transform: 'rotate(0)' }, { transform: 'rotate(4deg)' }], { at: 2.1, dur: 1.475, iter: Infinity, dir: 'alternate', ease: 'ease-in-out' });
+
+    // stickers & pills — slap on with overshoot
+    const slap = (sel, at, rot = 0) => ctx.anim(sel, [
+      { transform: `scale(1.6) rotate(${rot}deg)`, opacity: 0 },
+      { transform: 'scale(.9) rotate(0)', opacity: 1, offset: .55 },
+      { transform: 'scale(1.04) rotate(0)', opacity: 1, offset: .8 },
+      { transform: 'scale(1) rotate(0)', opacity: 1 },
+    ], { at, dur: .55, ease: 'cubic-bezier(.3,.6,.3,1)' });
+    slap('.pE-ed', 1.7, -20);
+    ctx.anim('.pE-purpose', [{ transform: 'translateX(-30px)', opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }], { at: 1.85, dur: .5 });
+
+    // windows open (2000s pop)
+    const winOpen = (sel, at) => {
+      ctx.anim(sel, [
+        { transform: 'scale(.2,.05)', opacity: 0, easing: S },
+        { transform: 'scale(.6,.3)', opacity: .7, offset: .2, easing: S },
+        { transform: 'scale(.9,.75)', opacity: 1, offset: .4 },
+        { transform: 'scale(1.02,1.02)', opacity: 1, offset: .75 },
+        { transform: 'scale(1,1)', opacity: 1 },
+      ], { at, dur: .5, ease: 'linear' });
+    };
+    winOpen('.pE-w1', 2.3);
+    ctx.anim('.pE-w1 .pE-body > *', [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], { at: 2.65, dur: .35, stagger: .12 });
+    winOpen('.pE-wq', 4.0);
+    ctx.anim('.pE-qr', [{ opacity: 0 }, { opacity: 1 }], { at: 4.35, dur: .3, ease: 'linear' });
+
+    slap('.pE-dd', 3.4, 25);
+    ctx.anim('.pE-ddi', [{ transform: 'rotate(4deg)' }, { transform: 'rotate(-2deg)' }], { at: 4, dur: 2, iter: Infinity, dir: 'alternate', ease: 'ease-in-out' });
+    slap('.pE-tag', 3.75, -10);
+
+    ctx.anim('.pE-task', [{ transform: 'translateY(90px)' }, { transform: 'translateY(0)' }], { at: 4.5, dur: .6 });
+
+    // sparkles: pop in, then twinkle (separate elements per motion)
+    ctx.anim('.pE-st', [{ transform: 'scale(0) rotate(-90deg)', opacity: 0 }, { transform: 'scale(1.3) rotate(0)', opacity: 1, offset: .6 }, { transform: 'scale(1) rotate(0)', opacity: 1 }], { at: .7, dur: .5, stagger: .28 });
+    ctx.anim('.pE-stw', [
+      { transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.55)', opacity: .4, offset: .35 },
+      { transform: 'scale(1.12)', opacity: 1, offset: .6 }, { transform: 'scale(1)', opacity: 1 },
+    ], { at: 2.5, dur: 1.1, iter: Infinity, stagger: .37, ease: 'ease-in-out' });
+  },
+};
+</script>
+
+<script>
+window.__ready = (async () => {
+  await document.fonts.ready;
+  const m = mountPoster('E', document.getElementById('cap'));
+  await Promise.all([...document.querySelectorAll('#cap img')].map(i => i.decode ? i.decode().catch(() => {}) : 0));
+  // 한글 폰트 조각(unicode-range)은 글자가 놓인 뒤에야 받기 시작한다 — 붙인 뒤 로딩이 끝날 때까지 기다린다
+  for (let i = 0; i < 40; i++) {
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    await document.fonts.ready;
+    if (document.fonts.status === 'loaded' && [...document.fonts].every(f => f.status !== 'loading')) break;
+  }
+  window.__T = m.T; window.__seek = t => m.seek(t);
+  const q = new URLSearchParams(location.search);
+  if (q.has('t')) m.seek(+q.get('t')); else if (!q.has('still')) {
+    let t0 = performance.now(); const tick = now => { m.seek(((now - t0) / 1000) % m.T); requestAnimationFrame(tick); }; requestAnimationFrame(tick);
+  }
+  return true;
+})();
+</script></body></html>

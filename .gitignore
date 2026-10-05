@@ -1,3 +1,4 @@
 .omc/
 .DS_Store
 *.mp4
+!v/*.mp4

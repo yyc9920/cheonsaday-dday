@@ -3,75 +3,443 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>천사데이 D-day 영상</title>
-<meta name="description" content="제14회 천사데이 찬스바자회 홍보 영상 — 오늘 날짜의 D-day 영상을 골라 받으세요.">
+<title>천사데이 포스터 모음</title>
+<meta name="description" content="제14회 천사데이 찬스바자회(2026.10.17 토, 홀리씨즈교회) 포스터 시안 모음 — 마우스를 올리면 움직이고, 누르면 크게 봅니다.">
+<meta property="og:title" content="천사데이 찬스바자회 포스터 모음">
+<meta property="og:description" content="2026. 10. 17 (토) 오전 9:30 – 오후 5:00 · 홀리씨즈교회">
+<meta property="og:image" content="https://yyc9920.github.io/cheonsaday-dday/s/dday-12.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
-/* layout: phone-sized preview, then three rows of choices and one download button; stacks to one column on phones */
+/* layout: hero (today's D-day + D-day video) → sticky sound/filter bar → one grid per style; viewer = fixed full-screen overlay */
 :root {
-  --bg: #FFF6EE; --surface: #FFFFFF; --fg: #2B1A10; --muted: #74604F; --line: #F0D9C6; --accent: #B8430A; --accent-ink: #FFFFFF; --sun: #FFB347;
-  --display: "Black Han Sans", "Apple SD Gothic Neo", sans-serif; --body: "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --bg: #FBF5EF; --surface: #FFFFFF; --sunk: #F2E7DD; --fg: #2A1A10; --muted: #76604E; --line: #EAD8C8;
+  --accent: #C2470C; --accent-ink: #FFFFFF; --pick: #1F6B4A; --pick-bg: #E2F2E9; --shadow: 0 1px 2px rgba(80, 40, 10, .08), 0 6px 20px rgba(80, 40, 10, .08);
+  --display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark) { :root { --bg: #1C130D; --surface: #2A1D14; --fg: #FBEFE4; --muted: #C4AE9B; --line: #4A3526; --accent: #FF7A33; --accent-ink: #1C130D; color-scheme: dark } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #16110D; --surface: #221A14; --sunk: #2B2119; --fg: #F8EDE3; --muted: #BCA693; --line: #3A2D23;
+  --accent: #FF7D3B; --accent-ink: #1A0F08; --pick: #7FD4A8; --pick-bg: #18382A; --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 20px rgba(0, 0, 0, .35); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #16110D; --surface: #221A14; --sunk: #2B2119; --fg: #F8EDE3; --muted: #BCA693; --line: #3A2D23;
+  --accent: #FF7D3B; --accent-ink: #1A0F08; --pick: #7FD4A8; --pick-bg: #18382A; --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 20px rgba(0, 0, 0, .35); color-scheme: dark }
 * { box-sizing: border-box }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); word-break: keep-all; padding: max(20px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom)) }
-.wrap { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start }
-@media (max-width: 760px) { .wrap { grid-template-columns: 1fr; gap: 18px } }
-h1 { font: 30px/1.15 var(--display); margin: 0 0 4px; text-wrap: balance }
-.sub { color: var(--muted); margin: 0 0 18px; font-size: 14px }
-.prev { width: var(--pw, 389px); max-width: 100%; margin: 0 auto; border-radius: 18px; overflow: hidden; background: #EA6519; box-shadow: 0 10px 30px rgba(90, 30, 0, .18) }
-.prev iframe { border: 0; display: block; width: 100%; height: 100% }
-.grp { margin: 0 0 16px }
-.grp b { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; letter-spacing: .04em }
-.chips { display: flex; flex-wrap: wrap; gap: 6px }
-.chips button { font: 700 14px var(--body); min-height: 44px; min-width: 64px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; font-variant-numeric: tabular-nums }
-.chips button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg) }
-.chips button.today::after { content: " 오늘"; font-weight: 500; font-size: 11px; color: var(--accent) }
-.chips button[aria-pressed="true"].today::after { color: var(--sun) }
-#get { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 22px; border-radius: 14px; background: var(--accent); color: var(--accent-ink); font: 700 17px var(--body); text-decoration: none; margin: 8px 0 10px }
-.note { font-size: 13px; color: var(--muted); margin: 0 }
-button:focus-visible, a:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px }
+[hidden] { display: none !important }
+html { -webkit-text-size-adjust: 100% }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); word-break: keep-all; padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right)); padding-block: max(20px, env(safe-area-inset-top)) max(48px, env(safe-area-inset-bottom)) }
+.wrap { max-width: 1240px; margin: 0 auto }
+button { font: inherit; color: inherit }
+button:focus-visible, .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 28px 40px; align-items: center; padding-block: 12px 28px }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--accent); margin: 0 0 8px }
+.dday { font: clamp(76px, 15vw, 150px)/.9 var(--display); letter-spacing: -.01em; margin: 0; font-variant-numeric: tabular-nums }
+.dday small { display: block; font: 700 clamp(16px, 2.4vw, 20px)/1.4 var(--body); letter-spacing: 0; color: var(--muted); margin-top: 14px }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 22px 0 0; font-size: 15px }
+.facts dt { color: var(--muted) }
+.facts dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums }
+.feature { display: grid; gap: 10px }
+.feature .card { box-shadow: var(--shadow) }
+.feature-cap { font-size: 13px; color: var(--muted); margin: 0 }
+
+/* bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin-inline: -16px; padding: 10px 16px; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between }
+.group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-width: 0 }
+.lbl { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .04em; margin-right: 2px }
+.chip { min-height: 38px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg) }
+.chip .n { font-size: 12px; opacity: .7; font-variant-numeric: tabular-nums }
+.snd[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent) }
+.snd svg { width: 16px; height: 16px }
+
+/* sections + grid */
+.sec { padding-top: 34px; scroll-margin-top: 70px }
+.sec h2 { font: 26px/1.2 var(--display); margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.sec h2 .en { font: 500 13px var(--body); color: var(--muted); letter-spacing: .03em }
+.sec h2 .cnt { font: 500 13px var(--body); color: var(--muted) }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, calc(50% - 8px)), 1fr)); gap: 22px 16px; margin-top: 14px }
+.card { position: relative; display: block; width: 100%; aspect-ratio: 1080 / 1512; border-radius: 10px; overflow: hidden; background: var(--sunk); border: 0; padding: 0; cursor: zoom-in }
+.card img, .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block }
+.card video { opacity: 0; transition: opacity .2s }
+.card iframe, .vlive iframe { position: absolute; left: 0; top: 0; width: 700px; height: 980px; border: 0; transform-origin: 0 0; transform: scale(var(--k, .3)); pointer-events: none; background: transparent }
+.vlive { position: absolute; inset: 0; overflow: hidden }
+.card.playing video { opacity: 1 }
+.card .live { position: absolute; left: 8px; top: 8px; display: none; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 999px; background: rgba(0, 0, 0, .62); color: #fff; font-size: 12px; font-weight: 700 }
+.card.playing .live { display: inline-flex }
+.card .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #FF5A3C }
+.item { display: grid; gap: 8px; min-width: 0 }
+.meta { display: grid; gap: 1px; min-width: 0 }
+.meta b { font-size: 15px; font-weight: 700; line-height: 1.35 }
+.meta span { font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums }
+.pick { display: inline-block; font-size: 12px; font-weight: 700; color: var(--pick); background: var(--pick-bg); border-radius: 6px; padding: 1px 7px; margin-left: 6px; vertical-align: 1px }
+.empty { color: var(--muted); padding: 30px 0 }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between }
+footer a { color: var(--accent); font-weight: 700 }
+
+/* viewer */
+.viewer { position: fixed; inset: 0; z-index: 50; background: #0D0A08; color: #F6EDE4; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); touch-action: pan-y }
+.vtop { display: flex; align-items: center; gap: 10px 14px; padding: 10px 14px; flex-wrap: wrap }
+.vtitle { min-width: 0; flex: 1 1 200px }
+.vtitle b { display: block; font-size: 16px; line-height: 1.3 }
+.vtitle span { font-size: 12.5px; color: #C9B8A8 }
+.vbadge { font: 20px/1 var(--display); color: #FFB37F; padding: 6px 10px; border: 1px solid #4A3A2E; border-radius: 8px; font-variant-numeric: tabular-nums }
+.viewer .chip { background: #241B15; border-color: #3E3027; color: #F6EDE4 }
+.viewer .snd[aria-pressed="true"] { background: #FF7D3B; color: #1A0F08; border-color: #FF7D3B }
+.x { width: 42px; height: 42px; border-radius: 50%; border: 1px solid #3E3027; background: #241B15; cursor: pointer; display: grid; place-items: center }
+.x svg { width: 18px; height: 18px }
+.stage { position: relative; min-height: 0; margin: 0 16px }
+.stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: transparent; display: block }
+.vbot { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 10px 16px 14px }
+.nav { flex: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid #3E3027; background: rgba(36, 27, 21, .85); color: #F6EDE4; cursor: pointer; display: grid; place-items: center }
+.nav svg { width: 20px; height: 20px }
+.vfoot { min-width: 0; font-size: 13px; color: #A8968A; text-align: center; font-variant-numeric: tabular-nums }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 22px }
+  .feature { max-width: 340px; width: 100%; margin: 0 auto }
+  .stage { margin: 0 8px }
+}
+@media (max-width: 420px) {
+  .bar { gap: 8px }
+  .chip { min-height: 36px; padding: 0 11px; font-size: 13.5px }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="prev" id="prev"><iframe id="frame" title="영상 미리보기 (소리 없음)"></iframe></div>
-  <div>
-    <h1>천사데이 D-day 영상</h1>
-    <p class="sub">제14회 천사데이 찬스바자회 · 2026년 10월 17일 토요일</p>
-    <div class="grp"><b>D-day</b><div class="chips" id="ds"></div></div>
-    <div class="grp"><b>비율</b><div class="chips" id="ratio"><button data-v="story">9:16 릴스·스토리</button><button data-v="poster">포스터 비율</button></div></div>
-    <a id="get" href="#">영상 받기</a>
-    <p class="note">MP4 · 18초 · 나레이션과 배경음악 포함 · 약 20MB. 미리보기는 소리가 나지 않습니다.<br>아이폰에서는 받은 파일을 ‘파일’ 앱에서 열고 공유 → ‘비디오 저장’을 누르면 사진첩에 들어갑니다.</p>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">제14회 천사데이 찬스바자회</p>
+      <h1 class="dday" id="dday">D-</h1>
+      <dl class="facts">
+        <dt>날짜</dt><dd>2026. 10. 17 (토)</dd>
+        <dt>시간</dt><dd>오전 9:30 – 오후 5:00</dd>
+        <dt>장소</dt><dd>홀리씨즈교회 · 이수역에서 걸어서 7분</dd>
+      </dl>
+    </div>
+    <div class="feature" id="feature"></div>
+  </header>
+
+  <nav class="bar" aria-label="소리와 보기">
+    <div class="group" role="group" aria-label="소리">
+      <span class="lbl">소리</span>
+      <button class="chip snd" data-snd="bgm" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>BGM·효과음</button>
+      <button class="chip snd" data-snd="narr" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 19v3"/></svg>나레이션</button>
+    </div>
+    <div class="group" role="group" aria-label="보기" id="filters"></div>
+  </nav>
+
+  <main id="list"></main>
+
+  <footer>
+    <span>마우스를 올리면 움직이고, 누르면 크게 봅니다. ←·→ 로 넘기고 Esc 로 닫아요.</span>
+    <a href="https://github.com/yyc9920/cheonsaday-dday/releases/tag/videos-v1" target="_blank" rel="noopener">D-day 영상 파일 받기 ↗</a>
+  </footer>
+</div>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="포스터 크게 보기">
+  <div class="vtop">
+    <div class="vtitle"><b id="vName"></b><span id="vSub"></span></div>
+    <span class="vbadge" id="vDday"></span>
+    <button class="chip snd" data-snd="bgm" aria-pressed="false">BGM·효과음</button>
+    <button class="chip snd" data-snd="narr" aria-pressed="false">나레이션</button>
+    <button class="x" id="vClose" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="stage">
+    <video id="vVideo" muted playsinline preload="auto"></video>
+    <div class="vlive" id="vLive" hidden></div>
+  </div>
+  <div class="vbot">
+    <button class="nav" id="vPrev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="vfoot" id="vFoot"></span>
+    <button class="nav" id="vNext" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </div>
+
 <script>
-const EVENT = Date.UTC(2026, 9, 17), MAX = 15;
-const REL = 'https://github.com/yyc9920/cheonsaday-dday/releases/download/videos-v1/';
-// today's date in Korea, whatever the viewer's time zone
-const k = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).split('-').map(Number);
-const today = Math.min(MAX, Math.max(0, Math.round((EVENT - Date.UTC(k[0], k[1] - 1, k[2])) / 864e5)));
-const sel = { d: today, ratio: 'story' };
-const label = d => d <= 0 ? 'D-DAY' : 'D-' + d;
-const ds = document.getElementById('ds');
-ds.innerHTML = Array.from({ length: MAX + 1 }, (_, i) => MAX - i).map(d => `<button data-v="${d}" class="${d === today ? 'today' : ''}">${label(d)}</button>`).join('');
-for (const [id, key] of [['ds', 'd'], ['ratio', 'ratio']])
-  document.getElementById(id).onclick = e => { const b = e.target.closest('button'); if (!b) return; sel[key] = key === 'd' ? +b.dataset.v : b.dataset.v; render(); };
-let last = '';
-function render() {
-  for (const [id, key] of [['ds', 'd'], ['ratio', 'ratio']])
-    document.querySelectorAll(`#${id} button`).forEach(b => b.setAttribute('aria-pressed', String((key === 'd' ? +b.dataset.v : b.dataset.v) === sel[key])));
-  const prev = document.getElementById('prev'), w = Math.min(389, prev.parentElement.clientWidth || 389), H = sel.ratio === 'poster' ? 1512 : 1920;
-  prev.style.setProperty('--pw', w + 'px'); prev.style.height = Math.round(w * H / 1080) + 'px';
-  const src = `motion.html?v=1&ratio=${sel.ratio}&scale=${(w / 1080).toFixed(4)}&d=${sel.d}`;
-  if (src !== last) { document.getElementById('frame').src = src; last = src; }
-  const get = document.getElementById('get');
-  get.href = `${REL}dday-${sel.d}-${sel.ratio}.mp4`;
-  get.textContent = `${label(sel.d)} · ${sel.ratio === 'story' ? '9:16' : '포스터 비율'} 영상 받기`;
+const CATALOG = [{"id": "A", "code": "v1-A", "round": "v1", "style": "A", "name": "첫 시안", "why": "주황 모눈 종이에 오려 붙인 제목, 폴라로이드 속 부스 그림.", "picked": false, "live": false}, {"id": "B", "code": "v1-B", "round": "v1", "style": "B", "name": "첫 시안", "why": "60~70년대 잡지 광고 지면. 원본 정보 순서를 그대로.", "picked": false, "live": false}, {"id": "C", "code": "v1-C", "round": "v1", "style": "C", "name": "첫 시안", "why": "한지 위 세로 붓글씨 제목과 붉은 낙관.", "picked": false, "live": false}, {"id": "D", "code": "v1-D", "round": "v1", "style": "D", "name": "구름 위 천사", "why": "새벽 하늘 구름 위에 떠 있는 부스와 천사 날개.", "picked": false, "live": false}, {"id": "E", "code": "v1-E", "round": "v1", "style": "E", "name": "첫 시안", "why": "크롬 버블 제목과 2000년대 OS 창 UI.", "picked": false, "live": true}, {"id": "F", "code": "v1-F", "round": "v1", "style": "F", "name": "아스키 디코드", "why": "문자로 그린 날개 달린 쇼핑백이 해독되는 초대장.", "picked": false, "live": false}, {"id": "A2", "code": "v2-A", "round": "v2", "style": "A", "name": "생성 그림", "why": "펼친 스크랩북에 생성한 바자회 사진을 붙인 콜라주.", "picked": false, "live": false}, {"id": "B2", "code": "v2-B", "round": "v2", "style": "B", "name": "생성 그림", "why": "빵·꽃·잼이 담긴 쇼핑백 하나를 세운 고급 잡지 광고.", "picked": false, "live": false}, {"id": "C2", "code": "v2-C", "round": "v2", "style": "C", "name": "생성 그림", "why": "한지 위 먹선 천사 날개와 오방색 보자기 꾸러미.", "picked": false, "live": false}, {"id": "D2", "code": "v2-D", "round": "v2", "style": "D", "name": "물 위의 가판대", "why": "새벽 물 위에 떠 있는 날개 달린 가판대, 폴라로이드 한 장.", "picked": false, "live": false}, {"id": "E2", "code": "v2-E", "round": "v2", "style": "E", "name": "크롬 오브젝트", "why": "크롬 날개·크롬 가방과 홀로그램 가격표.", "picked": false, "live": true}, {"id": "F2", "code": "v2-F", "round": "v2", "style": "F", "name": "아스키 판화", "why": "생성한 판화를 문자로 새긴 날개 달린 쇼핑백.", "picked": false, "live": false}, {"id": "A3", "code": "v3-A", "round": "v3", "style": "A", "name": "실물 사진", "why": "실제 바자회 물품 사진 7장(장미 꽃다발·킹크랩·오렌지·야끼소바·팔찌·리본·천막 전구)을 붙인 스크랩북.", "picked": false, "live": false}, {"id": "B3", "code": "v3-B", "round": "v3", "style": "B", "name": "실물 정물", "why": "쇼핑백에 실제 품목(장미 꽃다발·수제 초콜릿·찻주전자·수제청·리본) + 펌프스·주물 냄비.", "picked": false, "live": false}, {"id": "C3", "code": "v3-C", "round": "v3", "style": "C", "name": "장터 꾸러미", "why": "먹선 날개 아래 오방색 보자기 매듭의 수제청·깍두기·기름병, 과일 바구니·장미·찻잔.", "picked": false, "live": false}, {"id": "D3", "code": "v3-D", "round": "v3", "style": "D", "name": "물 위의 장터", "why": "날개 단 가판대에 실제 품목(장미 꽃다발·꽃상자·피튜니아·오렌지 바구니·찻주전자)과 파란 천막 전구.", "picked": false, "live": false}, {"id": "E3", "code": "v3-E", "round": "v3", "style": "E", "name": "크롬 실물", "why": "크롬 날개 위에 실제 품목을 크롬으로 — 하늘색 가죽 토트·킹크랩·남색 펌프스·장미와 구슬 팔찌.", "picked": false, "live": true}, {"id": "F3", "code": "v3-F", "round": "v3", "style": "F", "name": "아스키 킹크랩", "why": "홀리피셔마켓의 실제 킹크랩을 큰 실루엣 하나로 문자에 새김.", "picked": false, "live": false}, {"id": "G3", "code": "v3-G", "round": "v3", "style": "G", "name": "천사 마을 장터", "why": "손그림 천막 마을에 실제 품목을 장난스러운 크기로 — 큰 킹크랩·뜨개 곰·과일 바구니·야끼소바·닭꼬치·장미·리본.", "picked": false, "live": false}, {"id": "H3", "code": "v3-H", "round": "v3", "style": "H", "name": "고딕 로맨스", "why": "검은 벨벳 위 실제 품목 — 프리저브드 장미 꽃다발·리본 핀·보라 머리띠·구슬 팔찌·진주 목걸이·펌프스, 은빛 날개.", "picked": false, "live": false}, {"id": "A42", "code": "v4-A2", "round": "v4", "style": "A", "name": "한 장 크게", "why": "장미 꽃다발 폴라로이드 한 장을 크게, 닭꼬치·오렌지 사진 2장을 옆에.", "picked": true, "live": false}, {"id": "A41", "code": "v4-A1", "round": "v4", "style": "A", "name": "사진 네 장 콜라주", "why": "v3-A 구도 그대로, 사진 7장→4장(장미 꽃다발·닭꼬치·오렌지·구슬 팔찌). 킹크랩·천막·야끼소바·손님 그림 뺌.", "picked": false, "live": false}, {"id": "A43", "code": "v4-A3", "round": "v4", "style": "A", "name": "빨랫줄에 걸기", "why": "주황 격자 바탕에 빨랫줄 두 줄 — 장미·닭꼬치·오렌지·팔찌 폴라로이드와 QR 카드가 집게에.", "picked": false, "live": false}, {"id": "B43", "code": "v4-B3", "round": "v4", "style": "B", "name": "한 송이 크게", "why": "프리저브드 장미 꽃다발 하나를 지면 밖까지 크게, 헤드라인이 주인공인 한 장 광고.", "picked": false, "live": false}, {"id": "B41", "code": "v4-B1", "round": "v4", "style": "B", "name": "쇼핑백 하나", "why": "크래프트 쇼핑백에 수제 초콜릿·찻주전자·수제청 단지와 남색 리본, 옆에 장미 꽃다발. 펌프스·냄비는 뺌.", "picked": true, "live": false}, {"id": "B42", "code": "v4-B2", "round": "v4", "style": "B", "name": "카탈로그 네 칸", "why": "액자 네 칸 — 닭꼬치(푸드코트)·레몬청과 오렌지 바구니(홀리파머스마켓)·리본 핀과 팔찌(의류 및 악세사리관)·펌프스(홀리플리마켓).", "picked": false, "live": false}, {"id": "C43", "code": "v4-C3", "round": "v4", "style": "C", "name": "보자기 펼침", "why": "조각보 한 장이 화면 전체 — 가운데에 수제청·깍두기·닭꼬치·과일 바구니·찻주전자·팔찌·장미.", "picked": true, "live": false}, {"id": "C41", "code": "v4-C1", "round": "v4", "style": "C", "name": "날개와 보자기", "why": "먹선 날개 아래 수제청·깍두기·기름병, 과일 바구니·장미·찻주전자. 위아래 색동 띠·조각보를 더함.", "picked": false, "live": false}, {"id": "C42", "code": "v4-C2", "round": "v4", "style": "C", "name": "책가도 서가", "why": "조선 민화 책가도 — 칸마다 수제청·장미 / 과일 바구니 / 찻주전자 / 깍두기·리본 핀 / QR 액자 / 닭꼬치·팔찌.", "picked": false, "live": false}, {"id": "D41", "code": "v4-D1", "round": "v4", "style": "D", "name": "날개 탁자 정물", "why": "노을 바다 위 떠 있는 흰 원탁에 피튜니아 화분·꽃상자·오렌지 바구니·찻주전자와 잔, 날개는 탁자 뒤. 캐노피·전구 삭제.", "picked": true, "live": false}, {"id": "D42", "code": "v4-D2", "round": "v4", "style": "D", "name": "구름 위의 문", "why": "구름 위 흰 아치 문 너머 빛, 문에서 나온 꽃상자·피튜니아·장미와 찻주전자·오렌지 바구니·수제 초콜릿이 떠 있음.", "picked": false, "live": false}, {"id": "D43", "code": "v4-D3", "round": "v4", "style": "D", "name": "빈 수영장 꽃상자", "why": "물기 남은 빈 파스텔 수영장에 꽃상자(양귀비·라벤더·카네이션) 하나만 크게, 위에 작은 날개.", "picked": true, "live": false}, {"id": "E42", "code": "v4-E2", "round": "v4", "style": "E", "name": "창이 열리는 데스크톱", "why": "창 4개 — 푸드코트(닭꼬치 사진)·홀리플리마켓(하늘색 토트)·의류 및 악세사리관(구슬 팔찌 사진)·홀리파머스마켓(오렌지 사진).", "picked": false, "live": true}, {"id": "E41", "code": "v4-E1", "round": "v4", "style": "E", "name": "날개 위 네 물건", "why": "크롬 날개 위 하늘색 토트·남색 펌프스·장미·구슬 팔찌·보라 리본(킹크랩 대신).", "picked": true, "live": true}, {"id": "E43", "code": "v4-E3", "round": "v4", "style": "E", "name": "거대한 크롬 글자", "why": "화면을 채우는 크롬 3D 제목 위에 프리저브드 장미와 구슬 팔찌, 글자 면에 장미가 비침.", "picked": false, "live": true}, {"id": "F43", "code": "v4-F3", "round": "v4", "style": "F", "name": "날개 한 쌍", "why": "문자로 새긴 큰 천사 날개 사이에 리본 묶은 프리저브드 장미 한 송이.", "picked": true, "live": false}, {"id": "F41", "code": "v4-F1", "round": "v4", "style": "F", "name": "닭꼬치 한 판", "why": "v3 구도 그대로, 주인공을 문자로 새긴 닭꼬치 3개 + \"› 푸드코트\".", "picked": false, "live": false}, {"id": "F42", "code": "v4-F2", "round": "v4", "style": "F", "name": "판매관 목록", "why": "터미널 `ls` — 판매관 9곳이 한 줄씩 찍히고 이름마다 작은 아스키 아이콘.", "picked": false, "live": false}, {"id": "G43", "code": "v4-G3", "round": "v4", "style": "G", "name": "날개 바구니 한 장", "why": "그림책 표지 — 웃는 얼굴의 날개 달린 라탄 바구니가 오렌지·포도·레몬청을 담고 장미 꽃다발을 안고 있음.", "picked": false, "live": false}, {"id": "G41", "code": "v4-G1", "round": "v4", "style": "G", "name": "천사 마을 장터", "why": "날개 아래 언덕에 과일 바구니·뜨개 곰과 리본·닭꼬치·장미 꽃다발·찻주전자, 팻말 의류 및 악세사리관·홀리파머스마켓·푸드코트.", "picked": false, "live": false}, {"id": "G42", "code": "v4-G2", "round": "v4", "style": "G", "name": "판매관 보드게임 길", "why": "지그재그 말판 7칸 — 홀리파머스마켓(과일)·의류 및 악세사리관(팔찌)·푸드코트(닭꼬치)·슈즈관(부츠)·리빙관(쿠션)·아동용품관(아기 원피스)·홀리플리마켓(무드등), 도착 칸이 QR.", "picked": true, "live": false}, {"id": "H43", "code": "v4-H3", "round": "v4", "style": "H", "name": "흰 날개 꽃다발", "why": "아이보리 레이스·진주로 감싼 붉은 장미 꽃다발이 은빛 흰 날개 한가운데 — '화이트 고딕'.", "picked": true, "live": false}, {"id": "H41", "code": "v4-H1", "round": "v4", "style": "H", "name": "날개 아래 정물", "why": "v3 정물(펌프스·장미 꽃다발·남색 리본·보라 머리띠·팔찌·진주) — 검은 날개를 모브·자두색으로 밝히고 꽃잎을 줄임.", "picked": false, "live": false}, {"id": "H42", "code": "v4-H2", "round": "v4", "style": "H", "name": "막이 열리는 무대", "why": "붉은 벨벳 커튼이 열리고 스포트라이트 아래 검은 레이스 장미 꽃다발·진주·팔찌, 정보는 아이보리 카드.", "picked": false, "live": false}, {"id": "A51", "code": "v5-A1", "round": "v5", "style": "A", "name": "다꾸 콜라주", "why": "v4-A1 사진 네 장 그대로, 다이어리 꾸미기로 — 링·인덱스 탭, 찢긴 무늬 와시 테이프, 다이컷 스티커, 메모지 조각, 날짜 도장·스테이플·클립.", "picked": true, "live": false}, {"id": "B53", "code": "v5-B3", "round": "v5", "style": "B", "name": "한 송이 크게", "why": "처음 장면에서 아래 크림 띠가 꽃다발 리본을 자르던 것을 고침 — 띠는 카메라가 다 물러난 3.3초에 아래에서 올라옴.", "picked": true, "live": false}, {"id": "E52", "code": "v5-E2", "round": "v5", "style": "E", "name": "창이 열리는 데스크톱", "why": "창을 2열 격자에 맞춤 — 사진 창 4개가 같은 열·같은 줄, 날짜 창과 QR 창도 위아래 끝을 맞춤.", "picked": true, "live": true}, {"id": "F51", "code": "v5-F1", "round": "v5", "style": "F", "name": "닭꼬치 한 판", "why": "타자 커서가 글자보다 한 줄 위에 떠 있던 것을 글자 줄에 맞춤. 검은 띠 안에서는 크림색 커서.", "picked": true, "live": false}, {"id": "F52", "code": "v5-F2", "round": "v5", "style": "F", "name": "판매관 목록", "why": "큰 제목 줄의 커서를 글자 키에 맞추고(아래로 처지지 않게), 찬스바자회 상자 안에서도 보이게 검은 커서로.", "picked": true, "live": false}, {"id": "G53", "code": "v5-G3", "round": "v5", "style": "G", "name": "날개 바구니 한 장", "why": "왼쪽 책등 띠를 빼고 테두리·제목·리본·정보 상자를 가운데 정렬.", "picked": true, "live": false}, {"id": "H51", "code": "v5-H1", "round": "v5", "style": "H", "name": "날개 아래 정물", "why": "배치·모션은 v4-H1 그대로, 색만 밝게 — 바탕을 장미·자두색으로, 무대 사진·날개 밝기를 올림.", "picked": true, "live": false}, {"id": "D62", "code": "v6-D2", "round": "v6", "style": "D", "name": "꽃 계단 끝의 하늘", "why": "등나무·분홍 꽃 덮인 돌계단이 한 점 원근으로 바다·하늘까지 — 디딤판에 꽃상자·피튜니아 화분·찻주전자·오렌지 바구니. 참고: @ai.dreamscape00 꽃 계단 릴.", "picked": true, "live": false}, {"id": "D61", "code": "v6-D1", "round": "v6", "style": "D", "name": "하늘에 뜬 꽃다발", "why": "여름 하늘에 거대한 프리저브드 장미 꽃다발(러브비)이 떠 있고 새틴 리본이 나부낌, 풀밭엔 오렌지 바구니·피튜니아·꽃상자가 작게. 참고: @ai.dreamscape00 거대 오징어 릴.", "picked": true, "live": false}, {"id": "H71", "code": "v7-H1", "round": "v7", "style": "H", "name": "아이보리 갈라", "why": "v5-H1 배치·모션 그대로, 아이보리·샴페인 새틴 무대에 금빛 날개 — 장미 꽃다발·펌프스·리본·진주·구슬 팔찌를 밝은 레이스 위에 다시 그림.", "picked": true, "live": false}, {"id": "H72", "code": "v7-H2", "round": "v7", "style": "H", "name": "장밋빛 무대", "why": "줄무늬 커튼 무대는 유지, 로즈 핑크·연자주 파스텔로 — 정물은 핑크·라일락 새틴 위에 다시 그림.", "picked": true, "live": false}];
+const VER = '10052339';
+const STYLES = { A: ['스크랩북', 'Scrapbooking'], B: ['클래식 광고', 'Classic Advertising'], C: ['한지·오방색', 'Asian Chic'], D: ['드림코어', 'Dreamcore'],
+  E: ['네오 Y2K', 'Neo Y2K'], F: ['아스키', 'ASCII'], G: ['동화책', 'Whimsical'], H: ['비주얼계', 'Visual Kei'] };
+const EVENT = Date.UTC(2026, 9, 17);
+const $ = s => document.querySelector(s);
+const url = p => p + '?v=' + VER;
+
+/* ---------- D-day (한국 시간 기준, ?today=YYYY-MM-DD 로 시험) ---------- */
+function today() {
+  const q = new URLSearchParams(location.search).get('today');
+  if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 }
-render();
-let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(render, 200); });
+function dday() {
+  const [y, m, d] = today().split('-').map(Number);
+  const n = Math.round((EVENT - Date.UTC(y, m - 1, d)) / 864e5);
+  return { n, label: n > 0 ? 'D-' + n : n === 0 ? 'D-DAY' : 'D+' + (-n) };
+}
+let D = dday();
+function hero() {
+  return { id: 'dday', dday: true, name: D.n >= 0 ? `오늘의 D-day 영상 · ${D.n > 15 ? 'D-15' : D.label}` : 'D-day 영상 · 당일',
+    sub: '지금 쓰는 홍보 영상 · 18초', video: `v/dday-${Math.max(0, Math.min(15, D.n))}.mp4`, still: `s/dday-${Math.max(0, Math.min(15, D.n))}.webp`,
+    bgm: 'a/dday-bgm.mp3', narr: 'a/dday-narr.mp3', why: '날짜에 맞는 D-day 숫자가 들어간 영상이에요. 나레이션은 이 영상에 맞춰 녹음한 목소리예요.' };
+}
+function paintDday() {
+  D = dday();
+  const sub = D.n > 0 ? '바자회까지 ' + D.n + '일 남았어요' : D.n === 0 ? '오늘이 바자회 날이에요!' : '함께해 주셔서 고마워요';
+  $('#dday').innerHTML = D.label + '<small>' + sub + '</small>';
+  $('#vDday').textContent = D.label;
+}
+
+/* ---------- 목록 ---------- */
+const items = CATALOG.map(c => ({ ...c, video: `v/${c.id}.mp4`, still: `s/${c.id}.webp`,
+  bgm: c.picked ? `a/${c.id}.mp3` : `a/bgm-${c.style}.mp3`, narr: 'a/narr8.mp3',
+  sub: `${c.code} · ${STYLES[c.style][0]}`, sound: c.picked ? 'BGM + 효과음' : 'BGM' }));
+const order = (a, b) => (b.picked - a.picked) || b.round.localeCompare(a.round) || a.code.localeCompare(b.code);
+let filter = 'all', visible = [];
+
+const liveSrc = (it, q) => `h/${it.id}.html?${q}&v=${VER}`;
+function cardHTML(it) {
+  const face = it.live ? `<iframe src="${liveSrc(it, 't=7.9')}" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" title=""></iframe>`
+    : `<img src="${url(it.still)}" alt="" loading="lazy" decoding="async">`;
+  return `<div class="item"><button class="card" data-id="${it.id}" aria-label="${it.name} 크게 보기">
+    ${face}<span class="live">재생 중</span></button>
+    <div class="meta"><b>${it.name}${it.picked ? '<span class="pick">고른 안</span>' : ''}</b><span>${it.sub}</span></div></div>`;
+}
+function renderFilters() {
+  const n = s => items.filter(i => s === 'all' || (s === 'picked' ? i.picked : i.style === s)).length;
+  const keys = ['all', 'picked', ...Object.keys(STYLES)];
+  $('#filters').innerHTML = '<span class="lbl">보기</span>' + keys.map(k => `<button class="chip" data-f="${k}" aria-pressed="${k === filter}">${
+    k === 'all' ? '전체' : k === 'picked' ? '고른 안' : STYLES[k][0]}<span class="n">${n(k)}</span></button>`).join('');
+}
+function renderList() {
+  stopHover();
+  const secs = Object.keys(STYLES).filter(s => filter === 'all' || filter === 'picked' || filter === s);
+  visible = [];
+  $('#list').innerHTML = secs.map(s => {
+    const list = items.filter(i => i.style === s && (filter !== 'picked' || i.picked)).sort(order);
+    if (!list.length) return '';
+    visible.push(...list);
+    return `<section class="sec" id="s-${s}"><h2>${STYLES[s][0]} <span class="en">${STYLES[s][1]}</span><span class="cnt">${list.length}안</span></h2>
+      <div class="grid">${list.map(cardHTML).join('')}</div></section>`;
+  }).join('') || '<p class="empty">보여줄 포스터가 없어요.</p>';
+  bindCards($('#list'));
+}
+function renderFeature() {
+  const h = hero();
+  $('#feature').innerHTML = `<button class="card" data-id="dday" aria-label="${h.name} 크게 보기"><img src="${url(h.still)}" alt=""><span class="live">재생 중</span></button>
+    <p class="feature-cap">${h.name} — 마우스를 올리면 재생, 누르면 전체 화면</p>`;
+  bindCards($('#feature'));
+}
+const byId = id => id === 'dday' ? hero() : items.find(i => i.id === id);
+
+/* ---------- 소리 (영상은 늘 무음, 소리는 Web Audio 로 영상 시각에 맞춰) ---------- */
+const snd = { bgm: false, narr: false };
+try { Object.assign(snd, JSON.parse(localStorage.getItem('snd') || '{}')); } catch (e) {}
+let ac = null, gB, gN, live = [], cur = null;
+const bufs = new Map();
+function ensureAC() {
+  if (!ac) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+    ac = new AC(); gB = ac.createGain(); gN = ac.createGain(); gB.connect(ac.destination); gN.connect(ac.destination);
+  }
+  if (ac.state !== 'running') ac.resume().catch(() => {});
+  return ac;
+}
+function buf(src) {
+  if (!bufs.has(src)) bufs.set(src, fetch(url(src)).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => ac.decodeAudioData(b, ok, no))).catch(() => null));
+  return bufs.get(src);
+}
+function stopAudio() { live.forEach(s => { try { s.stop(); } catch (e) {} }); live = []; }
+function syncAudio() {
+  stopAudio();
+  if (!cur || cur.video.paused || !(snd.bgm || snd.narr) || !ensureAC()) return;
+  const token = cur, it = cur.item;
+  gB.gain.value = snd.narr ? 0.36 : 1;   // 나레이션이 켜지면 BGM 을 9dB 낮춤
+  gN.gain.value = 1;
+  [['bgm', it.bgm, gB], ['narr', it.narr, gN]].forEach(([k, src, g]) => {
+    if (!snd[k]) return;
+    buf(src).then(b => {
+      if (!b || cur !== token || token.video.paused) return;
+      const off = token.video.currentTime;
+      if (off >= b.duration) return;
+      const s = ac.createBufferSource(); s.buffer = b; s.connect(g); s.start(0, off); live.push(s);
+    });
+  });
+}
+function paintSnd() {
+  document.querySelectorAll('.snd').forEach(b => b.setAttribute('aria-pressed', snd[b.dataset.snd]));
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('.snd'); if (!b) return;
+  snd[b.dataset.snd] = !snd[b.dataset.snd];
+  try { localStorage.setItem('snd', JSON.stringify(snd)); } catch (err) {}
+  ensureAC(); paintSnd(); syncAudio();
+});
+
+/* 라이브 포스터(하네스 HTML) — <video> 와 같은 모양으로 다룬다: play/pause/currentTime/onplaying/onended */
+class LivePlayer {
+  constructor(ifr) { this.ifr = ifr; this.paused = true; this.t = 0; this.t0 = performance.now(); this.raf = 0; }
+  win() { try { const w = this.ifr.contentWindow; return w && w.__seek ? w : null; } catch (e) { return null; } }
+  get currentTime() { return this.paused ? this.t : (performance.now() - this.t0) / 1000; }
+  set currentTime(v) { this.t = v; this.t0 = performance.now() - v * 1000; }
+  async play() {
+    if (!this.paused) return;
+    this.paused = false; this.t0 = performance.now() - this.t * 1000;
+    let w = null;
+    for (let i = 0; i < 300 && !(w = this.win()); i++) { await new Promise(r => setTimeout(r, 50)); if (this.paused) return; }
+    if (!w) return;
+    try { await w.__ready; } catch (e) {}
+    if (this.paused) return;
+    const T = w.__T || 8;
+    this.t0 = performance.now() - this.t * 1000;
+    const tick = now => {
+      if (this.paused) return;
+      const t = (now - this.t0) / 1000;
+      if (t >= T) { w.__seek(T - .001); this.paused = true; this.t = 0; this.onended && this.onended(); return; }
+      w.__seek(Math.max(0, t)); this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    this.onplaying && this.onplaying();
+  }
+  pause() {
+    if (this.paused) return;
+    this.t = this.currentTime; this.paused = true; cancelAnimationFrame(this.raf);
+    this.onpause && this.onpause();
+  }
+  rest() { this.pause(); this.t = 0; const w = this.win(); if (w) w.__seek(7.9); }
+}
+function fit(box, ifr) {
+  const k = Math.min(box.clientWidth / 700, box.clientHeight / 980);
+  ifr.style.setProperty('--k', k);
+  ifr.style.left = (box.clientWidth - 700 * k) / 2 + 'px'; ifr.style.top = (box.clientHeight - 980 * k) / 2 + 'px';
+}
+const ro = new ResizeObserver(es => es.forEach(e => { const f = e.target.querySelector('iframe'); if (f) fit(e.target, f); }));
+
+/* 한 번에 영상 하나만: 재생 시작 → 소리 맞춤, 끝 → 처음부터 다시 */
+function attach(video, item) {
+  video.onplaying = () => { if (cur && cur.video === video) syncAudio(); };
+  video.onpause = video.onwaiting = () => { if (cur && cur.video === video) stopAudio(); };
+  video.onended = () => { video.currentTime = 0; video.play().catch(() => {}); };
+  cur = { video, item };
+}
+
+/* ---------- 호버 재생 (마우스 있는 기기만) ---------- */
+const canHover = matchMedia('(hover: hover) and (pointer: fine)');
+let hoverCard = null;
+function startHover(card) {
+  if (hoverCard === card || !$('#viewer').hidden) return;
+  stopHover();
+  const it = byId(card.dataset.id); if (!it) return;
+  hoverCard = card;
+  if (it.live) {
+    const p = new LivePlayer(card.querySelector('iframe'));
+    card._p = p; attach(p, it); card.classList.add('playing'); p.play();
+    return;
+  }
+  const v = document.createElement('video');
+  v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = url(it.video);
+  v.poster = card.querySelector('img').src;
+  card.insertBefore(v, card.querySelector('.live'));
+  v.addEventListener('playing', () => card.classList.add('playing'), { once: true });
+  attach(v, it);
+  v.play().catch(() => {});
+}
+function stopHover() {
+  if (!hoverCard) return;
+  if (hoverCard._p) {
+    if (cur && cur.video === hoverCard._p) { stopAudio(); cur = null; }
+    hoverCard._p.rest(); hoverCard._p = null;
+    hoverCard.classList.remove('playing'); hoverCard = null; return;
+  }
+  const v = hoverCard.querySelector('video');
+  if (cur && v && cur.video === v) { stopAudio(); cur = null; }
+  if (v) { v.pause(); v.removeAttribute('src'); v.load(); v.remove(); }
+  hoverCard.classList.remove('playing'); hoverCard = null;
+}
+function bindCards(root) {
+  root.querySelectorAll('.card').forEach(card => {
+    if (card.querySelector('iframe')) ro.observe(card);
+    card.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && canHover.matches) startHover(card); });
+    card.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') stopHover(); });
+    card.addEventListener('click', () => openViewer(card.dataset.id));
+  });
+}
+
+/* ---------- 크게 보기 (전체 화면) ---------- */
+const vv = $('#vVideo'), viewer = $('#viewer');
+let vIndex = -1, vList = [];
+function showItem(it) {
+  $('#vName').textContent = it.name;
+  $('#vSub').textContent = it.dday ? it.sub : `${it.sub} · 소리 ${it.sound}`;
+  $('#vFoot').textContent = `${vIndex + 1} / ${vList.length}` + (canHover.matches ? '  ·  ← → 넘기기 · Esc 닫기' : '  ·  옆으로 밀어 넘기기');
+  stopAudio(); if (cur && cur.video instanceof LivePlayer) cur.video.pause(); cur = null;
+  const box = $('#vLive');
+  box.innerHTML = '';
+  if (it.live) {
+    vv.pause(); vv.removeAttribute('src'); vv.removeAttribute('poster'); vv.load(); vv.hidden = true; box.hidden = false;
+    const f = document.createElement('iframe');
+    f.src = liveSrc(it, 'still'); f.tabIndex = -1; f.setAttribute('aria-hidden', 'true'); f.scrolling = 'no';
+    box.appendChild(f); fit(box, f); ro.observe(box);
+    const p = new LivePlayer(f); attach(p, it); p.play();
+    return;
+  }
+  box.hidden = true; vv.hidden = false;
+  vv.poster = url(it.still); vv.src = url(it.video); vv.currentTime = 0;
+  attach(vv, it);
+  vv.play().catch(() => {});
+}
+function openViewer(id) {
+  stopHover();
+  vList = id === 'dday' ? [hero(), ...visible] : visible;
+  vIndex = Math.max(0, vList.findIndex(i => i.id === id));
+  viewer.hidden = false; document.body.style.overflow = 'hidden';
+  if (snd.bgm || snd.narr) ensureAC();
+  showItem(vList[vIndex]);
+  const fs = viewer.requestFullscreen || viewer.webkitRequestFullscreen;
+  if (fs && !document.fullscreenElement) { try { const p = fs.call(viewer); if (p && p.catch) p.catch(() => {}); } catch (e) {} }
+  $('#vClose').focus({ preventScroll: true });
+}
+function closeViewer() {
+  if (viewer.hidden) return;
+  stopAudio(); if (cur && cur.video instanceof LivePlayer) cur.video.pause(); cur = null;
+  vv.pause(); vv.removeAttribute('src'); vv.load(); $('#vLive').innerHTML = '';
+  viewer.hidden = true; document.body.style.overflow = '';
+  const fe = document.fullscreenElement || document.webkitFullscreenElement;
+  if (fe) { const ex = document.exitFullscreen || document.webkitExitFullscreen; try { const p = ex.call(document); if (p && p.catch) p.catch(() => {}); } catch (e) {} }
+}
+function step(d) { if (!vList.length) return; vIndex = (vIndex + d + vList.length) % vList.length; showItem(vList[vIndex]); }
+$('#vClose').onclick = closeViewer;
+$('#vPrev').onclick = () => step(-1);
+$('#vNext').onclick = () => step(1);
+const onFs = () => { if (!(document.fullscreenElement || document.webkitFullscreenElement) && !viewer.hidden) closeViewer(); };
+document.addEventListener('fullscreenchange', onFs);
+document.addEventListener('webkitfullscreenchange', onFs);
+document.addEventListener('keydown', e => {
+  if (viewer.hidden) return;
+  if (e.key === 'Escape') closeViewer();
+  else if (e.key === 'ArrowLeft') step(-1);
+  else if (e.key === 'ArrowRight') step(1);
+});
+let sx = null;
+viewer.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') sx = [e.clientX, e.clientY]; });
+viewer.addEventListener('pointerup', e => {
+  if (!sx) return; const dx = e.clientX - sx[0], dy = e.clientY - sx[1]; sx = null;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+});
+document.addEventListener('visibilitychange', () => { if (document.hidden) { stopHover(); if (!viewer.hidden && cur) cur.video.pause(); } else if (!viewer.hidden && cur) { const p = cur.video.play(); if (p && p.catch) p.catch(() => {}); } });
+
+$('#filters').addEventListener('click', e => {
+  const b = e.target.closest('[data-f]'); if (!b) return;
+  filter = b.dataset.f; renderFilters(); renderList();
+});
+
+paintDday(); paintSnd(); renderFeature(); renderFilters(); renderList();
+setInterval(() => { const before = D.label; paintDday(); if (D.label !== before) renderFeature(); }, 60000);
 </script>
 </body>
 </html>
